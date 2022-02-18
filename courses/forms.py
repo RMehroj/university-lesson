@@ -1,6 +1,7 @@
 from django import forms
-from .models import Speciality
+from .models import Subject
 from .models import Teacher
+from django.forms import ModelForm
 
 
 class SpecialityForm(forms.Form):
@@ -10,13 +11,13 @@ class SpecialityForm(forms.Form):
     is_active = forms.BooleanField(required=True)
 
 
-class TeacherForm(forms.Form):
-    first_name = forms.CharField(max_length=256)
-    last_name = forms.CharField(max_length=256)
-    degree = forms.CharField(max_length=256)
+class TeacherCreateForm(ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ['first_name', 'last_name', 'degree', ]
 
 
-class SubjectForm(forms.Form):
-    name = forms.CharField(max_length=256)
-    Specialities = forms.ManyToManyField(Speciality)
-    teachers = forms.ManyToManyField(Teacher)
+class SubjectCreateForm(ModelForm):
+    class Meta:
+        model = Subject
+        fields = ['name', 'Specialities', 'teachers', ]
