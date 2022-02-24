@@ -8,11 +8,11 @@ from .views import teacher_create
 from .views import subject_create
 
 
-urlpatterns = {
+urlpatterns = [
     path("courses/subject/", subject_view, name='subjects'),
     path("courses/teacher/", teacher_view, name='teacher'),
     path("courses/speciality/", speciality_view, name='speciality'),
     path("courses/speciality/create/", speciality_create, name='speciality-view'),
     path("courses/teacher/create/", teacher_create, name='teacher-create'),
     path("courses/subject/create/",subject_create, name='subject-create'),
-}
+]
