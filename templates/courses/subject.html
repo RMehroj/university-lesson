@@ -8,8 +8,12 @@
     <h2>Subject:</h2>
         {% if subjects %}
             {% for subject in subjects %}
-                <li>{{ subject.name }} {{ subject.Specialities }} {{ subject.teachers }}</li>
-            {% endfor %}
+                <li>{{ subject.name }}
+                {% for spec in subject.specialities.all %}
+                    {{ spec.name }}
+                {% endfor %}
+                {{ subject.teachers }}</li>
+                {% endfor %}
         {% else %}
             <p>No subjects</p>
         {% endif %}

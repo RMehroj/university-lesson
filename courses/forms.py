@@ -2,6 +2,7 @@ from django import forms
 from .models import Subject
 from .models import Teacher
 from django.forms import ModelForm
+from django.views.generic.edit import FormView
 
 
 class SpecialityForm(forms.Form):
@@ -17,7 +18,7 @@ class TeacherCreateForm(ModelForm):
         fields = ['first_name', 'last_name', 'degree', ]
 
 
-class SubjectCreateForm(ModelForm):
+class SubjectCreateForm(FormView):
     class Meta:
         model = Subject
-        fields = ['name', 'Specialities', 'teachers', ]
+        fields = ['name', 'specialities', 'teachers', ]

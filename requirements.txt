@@ -1,16 +1,1 @@
-import datatime
-from flask import Flask, request,render_template
-pip install django
-django-admin startproject university
-python manage.py startapp courses
-python manage.py makemigrations
-python manage,py migrate
-from django.shortcuts import render, HttpResponse
-
-#foydali sayt:https://www.hacksoft.io/blog/django-filter-chaining
-#foydali sayt:https://pytutorial.com/loginview-django-example
-#foydali sayt:https://www.educba.com/django-filter-queryset/
-#https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
-#https://www.tutorialspoint.com/object-oriented-programming-in-python
-#https://www.tutorialspoint.com/python3/python_tutorial.pdf
 Django~=4.0.1

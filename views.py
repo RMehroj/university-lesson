@@ -2,10 +2,11 @@ from django.shortcuts import render
 from .models import Speciality
 from django.http import HttpResponse
 from .models import Teacher
-from .models import Subject
 from .forms import SpecialityForm
 from .forms import TeacherCreateForm
+from .models import Subject
 from .forms import SubjectCreateForm
+from django.views.generic.edit import FormView, Form
 
 
 def subject_view(request):
@@ -22,7 +23,7 @@ def teacher_view(request):
         teachers = Teacher.objects.all()
     else:
         teachers = Teacher.objects.filter(first_name__contains=search)
-    return render(request, "courses/teacher.html", {
+    return render(request, 'courses/teacher.html', {
         "teachers": teachers, "search": search,
     })
 
@@ -79,9 +80,13 @@ def subjectcreate_view(request):
     else:
         form = SubjectCreateForm(request.POST)
         if form.is_valid():
-            form.save()
+            data = form.cleaned_data
+            Subject.objects.create(
+                name=data['name'],
+                Speciality=data['Speciality'],
+                teachers=data['teachers'],
+            )
+
     return render(request, 'courses/subject_create.html', {
         "form": form,
     })
-
-

@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.urls import reverse
-
 
 class Speciality(models.Model):
     name = models.CharField(max_length=256)
@@ -27,20 +25,14 @@ class Teacher(models.Model):
     def __str__(self):
         return f'{self.last_name} {self.first_name}'
 
-    @staticmethod
-    def get_absolute_url():
-        return reverse('courses:index')
-
 
 class Subject(models.Model):
     name = models.CharField(max_length=256)
-    Specialities = models.ManyToManyField(Speciality)
-    teachers = models.ManyToManyField(Teacher)
+    specialities = models.ManyToManyField(Speciality)
+    teachers = models.OneToOneField(Teacher, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Subject'
 
     def __str__(self):
         return f'{self.name}'
-
-
