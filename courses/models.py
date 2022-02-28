@@ -13,6 +13,9 @@ class Speciality(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return self.name
+
 
 class Teacher(models.Model):
     first_name = models.CharField(max_length=256)
@@ -28,8 +31,8 @@ class Teacher(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=256)
-    Specialities = models.ManyToManyField(Speciality)
-    teachers = models.ManyToManyField(Teacher)
+    specialities = models.ManyToManyField(Speciality)
+    teachers = models.OneToOneField(Teacher, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Subject'
@@ -37,4 +40,5 @@ class Subject(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-
+    def get_specialitiy(self):
+        return "\n".join([p.name for p in self.specialities.all()])

@@ -18,8 +18,15 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
+    fieldsets = (None, {
+        'fields': ('name', 'teachers', 'specialities',)
+    }),
     search_fields = ('name',)
-    list_display = ('teachers', 'name',)
-    # 4-savolda shuni ichida 'specialities' ishlamadi.
-    autocomplete_fields = ('specialities', 'teachers',)
-    # list_select_related = ("specialities", 'teachers',) bu ham ishlamadi.
+    list_display = ('teachers', 'name', 'get_specialitiy',)
+    autocomplete_fields = ('teachers',)
+
+    @staticmethod
+    def get_specialitiy(obj):
+        return "\n".join([p.name for p in obj.specialities.all()])
+
+
